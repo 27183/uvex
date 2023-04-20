@@ -2,7 +2,7 @@ $(document).ready(function() {
   const equipmentList = $(".equipment-list");
 
   // Replace with the URL to the raw JSON file in your GitHub repository
-  const jsonFileURL = "https://raw.githubusercontent.com/user/repository/branch/equipment-data.json";
+  const jsonFileURL = "https://raw.githubusercontent.com/27183/uvex/master/equipment-data.json";
 
   fetch(jsonFileURL)
     .then(response => response.json())
