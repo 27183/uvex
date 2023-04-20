@@ -8,7 +8,7 @@
     "children": [
       {
         "name": "Part 1",
-        "image": "images/part1.jpg",
+        "image": "images/part1.png",
         "mass": "100g",
         "power": "5W",
         "thermal": "Example thermal properties",
@@ -16,7 +16,7 @@
       },
       {
         "name": "Part 2",
-        "image": "images/part2.jpg",
+        "image": "images/part2.png",
         "mass": "200g",
         "power": "10W",
         "thermal": "Example thermal properties",
