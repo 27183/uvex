@@ -1,46 +1,44 @@
 $(document).ready(function() {
-  const equipmentList = $(".equipment-list");
+  console.log('Document is ready.');
 
-  // Replace with the URL to the raw JSON file in your GitHub repository
-  const jsonFileURL = "https://raw.githubusercontent.com/27183/uvex/master/equipment-data.json";
+  $.getJSON('equipment-data.json', function(data) {
+    console.log('JSON data fetched:', data);
 
-  fetch(jsonFileURL)
-    .then(response => response.json())
-    .then(data => {
-      buildEquipmentList(data, equipmentList);
-      $('.equipment-item').hide().first().show();
-    });
-
-  function buildEquipmentList(data, parentElement) {
-    data.forEach(item => {
-      let itemElement = $('<li class="equipment-item"></li>');
-      itemElement.append(`<span>${item.name}</span>`);
+    function createListItem(item) {
+      console.log('Creating list item for:', item.name);
+      var li = $('<li>');
+      li.text(item.name);
 
       if (item.image) {
-        itemElement.append(`<img src="${item.image}" alt="${item.name}">`);
+        li.append('<br>');
+        li.append('<img src="' + item.image + '" alt="' + item.name + '">');
       }
 
-      if (item.mass || item.power || item.thermal) {
-        let propertiesElement = $('<ul class="equipment-item"></ul>');
-        if (item.mass) propertiesElement.append(`<li>Mass: ${item.mass}</li>`);
-        if (item.power) propertiesElement.append(`<li>Power: ${item.power}</li>`);
-        if (item.thermal) propertiesElement.append(`<li>Thermal properties: ${item.thermal}</li>`);
-        itemElement.append(propertiesElement);
-      }
+      li.append('<br>');
+      li.append('Mass: ' + item.mass);
+      li.append('<br>');
+      li.append('Power: ' + item.power);
+      li.append('<br>');
+      li.append('Thermal: ' + item.thermal);
 
       if (item.children && item.children.length > 0) {
-        let childrenElement = $('<ul class="equipment-item"></ul>');
-        buildEquipmentList(item.children, childrenElement);
-        itemElement.append(childrenElement);
+        var ul = $('<ul>');
+        item.children.forEach(function(child) {
+          ul.append(createListItem(child));
+        });
+        li.append(ul);
       }
 
-      parentElement.append(itemElement);
-    });
-  }
+      return li;
+    }
 
-  $(document).on('click', '.equipment-item > span', function() {
-    $(this).siblings('.equipment-item').toggle();
-    event.stopPropagation();
+    data.forEach(function(item) {
+      $('.equipment-list').append(createListItem(item));
+    });
+
+    console.log('Equipment list populated.');
+  }).fail(function(jqxhr, textStatus, error) {
+    console.error('Error fetching JSON data:', textStatus, error);
   });
 });
 
