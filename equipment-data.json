@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Assembly 1",
+    "image": "",
+    "mass": null,
+    "power": null,
+    "thermal": null,
+    "children": [
+      {
+        "name": "Part 1",
+        "image": "images/part1.jpg",
+        "mass": "100g",
+        "power": "5W",
+        "thermal": "Example thermal properties",
+        "children": []
+      },
+      {
+        "name": "Part 2",
+        "image": "images/part2.jpg",
+        "mass": "200g",
+        "power": "10W",
+        "thermal": "Example thermal properties",
+        "children": []
+      }
+    ]
+  }
+]
+
