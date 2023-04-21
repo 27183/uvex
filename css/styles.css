@@ -11,3 +11,8 @@
     max-height: 50px;
 }
 
+.expand-collapse-indicator {
+  cursor: pointer;
+  padding-left: 5px;
+}
+
